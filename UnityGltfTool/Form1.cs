@@ -1,4 +1,6 @@
-﻿using System;
+﻿using glTFLoader;
+using glTFLoader.Schema;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +16,8 @@ namespace UnityGltfTool
 {
 	public partial class Form1 : Form
 	{
+		private Gltf gltf;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -24,7 +28,7 @@ namespace UnityGltfTool
 
 		private void ColliderType_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			colliderOptionsPanel.Controls.Clear();
+			colliderTypeOptionsPanel.Controls.Clear();
 
 			var type = (ColliderType)colliderType.SelectedItem;
 			switch (type)
@@ -50,7 +54,7 @@ namespace UnityGltfTool
 
 			var sizeControl = new VectorProperty();
 			sizeControl.PropertyName = "Size";
-			colliderOptionsPanel.Controls.Add(sizeControl);
+			colliderTypeOptionsPanel.Controls.Add(sizeControl);
 		}
 
 		private void DisplaySphereOptions()
@@ -66,38 +70,38 @@ namespace UnityGltfTool
 
 			var heightControl = new TextBoxProperty();
 			heightControl.PropertyName = "Height";
-			colliderOptionsPanel.Controls.Add(heightControl);
+			colliderTypeOptionsPanel.Controls.Add(heightControl);
 
 			var directionControl = new ComboBoxProperty();
 			directionControl.PropertyName = "Direction";
 			directionControl.DataSource = Enum.GetValues(typeof(CapsuleDirection));
-			colliderOptionsPanel.Controls.Add(directionControl);
+			colliderTypeOptionsPanel.Controls.Add(directionControl);
 		}
 
 		private void AddCenterControl()
 		{
 			var centerControl = new VectorProperty();
 			centerControl.PropertyName = "Center";
-			colliderOptionsPanel.Controls.Add(centerControl);
+			colliderTypeOptionsPanel.Controls.Add(centerControl);
 		}
 
 		private void AddRadiusControl()
 		{
 			var radiusControl = new TextBoxProperty();
 			radiusControl.PropertyName = "Radius";
-			colliderOptionsPanel.Controls.Add(radiusControl);
+			colliderTypeOptionsPanel.Controls.Add(radiusControl);
 		}
 
 		private void DisplayMeshOptions()
 		{
 			var convexControl = new CheckBoxProperty();
 			convexControl.PropertyName = "Convex";
-			colliderOptionsPanel.Controls.Add(convexControl);
+			colliderTypeOptionsPanel.Controls.Add(convexControl);
 
 			var meshControl = new ComboBoxProperty();
 			meshControl.PropertyName = "Mesh";
 			// TODO: Get mesh list from gltf file
-			colliderOptionsPanel.Controls.Add(meshControl);
+			colliderTypeOptionsPanel.Controls.Add(meshControl);
 		}
 
 		private void GltfFileBrowse_Click(object sender, EventArgs e)
@@ -106,16 +110,17 @@ namespace UnityGltfTool
 			if (result == DialogResult.OK)
 			{
 				var file = gltfFileDialog.FileName;
-				gltfFileTextBox.Text = file;
-				LoadGltfFile(file);
+				gltfFileTextBox.Text = file; // This will trigger GltfFileTextBox_TextChanged
 			}
 		}
 
 		private void GltfFileTextBox_TextChanged(object sender, EventArgs e)
 		{
 			var file = gltfFileTextBox.Text;
-			if (HasGltfExtension(file) && File.Exists(file))
+			if (File.Exists(file) && HasGltfExtension(file))
 				LoadGltfFile(file);
+			else
+				Reset(false);
 		}
 
 		private bool HasGltfExtension(string file)
@@ -126,7 +131,68 @@ namespace UnityGltfTool
 
 		private void LoadGltfFile(string file)
 		{
-			throw new NotImplementedException();
+			Reset(true);
+
+			gltf = Interface.LoadModel(file);
+			for (int i = 0; i < gltf.Nodes.Length; i++)
+			{
+				var node = gltf.Nodes[i];
+				var name = node.Name ?? $"Node{i}";
+				nodeListBox.Items.Add(name);
+			}
+		}
+
+		private void Reset(bool setControlsEnabled)
+		{
+			gltf = null;
+			nodeListBox.Items.Clear();
+			colliderOptionsPanel.Enabled = false;
+			SetControlsEnabled(setControlsEnabled);
+		}
+
+		private void SetControlsEnabled(bool enabled)
+		{
+			colliderGroupBox.Enabled = enabled;
+			outputGroupBox.Enabled = enabled;
+			updateGltfButton.Enabled = enabled;
+		}
+
+		private void NodeListBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			colliderOptionsPanel.Enabled = true;
+			var nodeIndex = nodeListBox.SelectedIndex;
+			colliderType.SelectedItem = GetNodeColliderType(nodeIndex);
+		}
+
+		private ColliderType GetNodeColliderType(int nodeIndex)
+		{
+			var nodeColliderExtension = GetNodeColliderExtension(nodeIndex);
+			if (nodeColliderExtension != null)
+			{
+				var collider = GetCollider(nodeColliderExtension.Collider.Value);
+				if (collider.BoxCollider != null)
+					return ColliderType.Box;
+				else if (collider.SphereCollider != null)
+					return ColliderType.Sphere;
+				else if (collider.CapsuleCollider != null)
+					return ColliderType.Capsule;
+				else if (collider.MeshCollider != null)
+					return ColliderType.Mesh;
+			}
+
+			return ColliderType.None;
+		}
+
+		private Unity_collidersNodeExtension GetNodeColliderExtension(int nodeIndex)
+		{
+			var node = gltf.Nodes[nodeIndex];
+			return ExtensionUtil.LoadExtension<Unity_collidersNodeExtension>(node.Extensions, "Unity_colliders");
+		}
+
+		private Unity_collidersCollider GetCollider(int colliderIndex)
+		{
+			var colliderExtension = ExtensionUtil.LoadExtension<Unity_collidersGltfExtension>(gltf.Extensions, "Unity_colliders");
+			return colliderExtension.Colliders[colliderIndex];
 		}
 	}
 }

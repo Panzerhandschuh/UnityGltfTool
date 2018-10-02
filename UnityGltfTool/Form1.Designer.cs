@@ -33,11 +33,11 @@
 			this.gltfFileTextBox = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.colliderGroupBox = new System.Windows.Forms.GroupBox();
-			this.panel2 = new System.Windows.Forms.Panel();
+			this.colliderOptionsPanel = new System.Windows.Forms.Panel();
 			this.colliderType = new UnityGltfTool.UserControls.ComboBoxProperty();
-			this.colliderOptionsPanel = new System.Windows.Forms.FlowLayoutPanel();
+			this.colliderTypeOptionsPanel = new System.Windows.Forms.FlowLayoutPanel();
 			this.label3 = new System.Windows.Forms.Label();
-			this.panel1 = new System.Windows.Forms.Panel();
+			this.nodesPanel = new System.Windows.Forms.Panel();
 			this.label2 = new System.Windows.Forms.Label();
 			this.nodeListBox = new System.Windows.Forms.ListBox();
 			this.outputGroupBox = new System.Windows.Forms.GroupBox();
@@ -46,8 +46,8 @@
 			this.gltfFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.inputGroupBox.SuspendLayout();
 			this.colliderGroupBox.SuspendLayout();
-			this.panel2.SuspendLayout();
-			this.panel1.SuspendLayout();
+			this.colliderOptionsPanel.SuspendLayout();
+			this.nodesPanel.SuspendLayout();
 			this.outputGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -96,8 +96,9 @@
 			// 
 			this.colliderGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.colliderGroupBox.Controls.Add(this.panel2);
-			this.colliderGroupBox.Controls.Add(this.panel1);
+			this.colliderGroupBox.Controls.Add(this.colliderOptionsPanel);
+			this.colliderGroupBox.Controls.Add(this.nodesPanel);
+			this.colliderGroupBox.Enabled = false;
 			this.colliderGroupBox.Location = new System.Drawing.Point(13, 70);
 			this.colliderGroupBox.Name = "colliderGroupBox";
 			this.colliderGroupBox.Size = new System.Drawing.Size(366, 183);
@@ -105,16 +106,17 @@
 			this.colliderGroupBox.TabStop = false;
 			this.colliderGroupBox.Text = "Collider Configuration";
 			// 
-			// panel2
+			// colliderOptionsPanel
 			// 
-			this.panel2.Controls.Add(this.colliderType);
-			this.panel2.Controls.Add(this.colliderOptionsPanel);
-			this.panel2.Controls.Add(this.label3);
-			this.panel2.Location = new System.Drawing.Point(133, 19);
-			this.panel2.Name = "panel2";
-			this.panel2.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.panel2.Size = new System.Drawing.Size(225, 150);
-			this.panel2.TabIndex = 3;
+			this.colliderOptionsPanel.Controls.Add(this.colliderType);
+			this.colliderOptionsPanel.Controls.Add(this.colliderTypeOptionsPanel);
+			this.colliderOptionsPanel.Controls.Add(this.label3);
+			this.colliderOptionsPanel.Enabled = false;
+			this.colliderOptionsPanel.Location = new System.Drawing.Point(133, 19);
+			this.colliderOptionsPanel.Name = "colliderOptionsPanel";
+			this.colliderOptionsPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+			this.colliderOptionsPanel.Size = new System.Drawing.Size(225, 150);
+			this.colliderOptionsPanel.TabIndex = 3;
 			// 
 			// colliderType
 			// 
@@ -136,16 +138,16 @@
 			this.colliderType.Size = new System.Drawing.Size(225, 21);
 			this.colliderType.TabIndex = 2;
 			// 
-			// colliderOptionsPanel
+			// colliderTypeOptionsPanel
 			// 
-			this.colliderOptionsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.colliderTypeOptionsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.colliderOptionsPanel.Location = new System.Drawing.Point(0, 40);
-			this.colliderOptionsPanel.Name = "colliderOptionsPanel";
-			this.colliderOptionsPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.colliderOptionsPanel.Size = new System.Drawing.Size(225, 110);
-			this.colliderOptionsPanel.TabIndex = 1;
+			this.colliderTypeOptionsPanel.Location = new System.Drawing.Point(0, 40);
+			this.colliderTypeOptionsPanel.Name = "colliderTypeOptionsPanel";
+			this.colliderTypeOptionsPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+			this.colliderTypeOptionsPanel.Size = new System.Drawing.Size(225, 110);
+			this.colliderTypeOptionsPanel.TabIndex = 1;
 			// 
 			// label3
 			// 
@@ -156,14 +158,14 @@
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Collider Options:";
 			// 
-			// panel1
+			// nodesPanel
 			// 
-			this.panel1.Controls.Add(this.label2);
-			this.panel1.Controls.Add(this.nodeListBox);
-			this.panel1.Location = new System.Drawing.Point(7, 19);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(120, 150);
-			this.panel1.TabIndex = 2;
+			this.nodesPanel.Controls.Add(this.label2);
+			this.nodesPanel.Controls.Add(this.nodeListBox);
+			this.nodesPanel.Location = new System.Drawing.Point(7, 19);
+			this.nodesPanel.Name = "nodesPanel";
+			this.nodesPanel.Size = new System.Drawing.Size(120, 150);
+			this.nodesPanel.TabIndex = 2;
 			// 
 			// label2
 			// 
@@ -184,12 +186,14 @@
 			this.nodeListBox.Name = "nodeListBox";
 			this.nodeListBox.Size = new System.Drawing.Size(120, 134);
 			this.nodeListBox.TabIndex = 0;
+			this.nodeListBox.SelectedIndexChanged += new System.EventHandler(this.NodeListBox_SelectedIndexChanged);
 			// 
 			// outputGroupBox
 			// 
 			this.outputGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.outputGroupBox.Controls.Add(this.checkBoxProperty1);
+			this.outputGroupBox.Enabled = false;
 			this.outputGroupBox.Location = new System.Drawing.Point(13, 260);
 			this.outputGroupBox.Name = "outputGroupBox";
 			this.outputGroupBox.Size = new System.Drawing.Size(366, 49);
@@ -210,6 +214,7 @@
 			// 
 			// updateGltfButton
 			// 
+			this.updateGltfButton.Enabled = false;
 			this.updateGltfButton.Location = new System.Drawing.Point(13, 316);
 			this.updateGltfButton.Name = "updateGltfButton";
 			this.updateGltfButton.Size = new System.Drawing.Size(75, 23);
@@ -237,10 +242,10 @@
 			this.inputGroupBox.ResumeLayout(false);
 			this.inputGroupBox.PerformLayout();
 			this.colliderGroupBox.ResumeLayout(false);
-			this.panel2.ResumeLayout(false);
-			this.panel2.PerformLayout();
-			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
+			this.colliderOptionsPanel.ResumeLayout(false);
+			this.colliderOptionsPanel.PerformLayout();
+			this.nodesPanel.ResumeLayout(false);
+			this.nodesPanel.PerformLayout();
 			this.outputGroupBox.ResumeLayout(false);
 			this.ResumeLayout(false);
 
@@ -253,13 +258,13 @@
 		private System.Windows.Forms.TextBox gltfFileTextBox;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.GroupBox colliderGroupBox;
-		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.Panel colliderOptionsPanel;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.FlowLayoutPanel colliderOptionsPanel;
+		private System.Windows.Forms.FlowLayoutPanel colliderTypeOptionsPanel;
 		private UserControls.ComboBoxProperty colliderType;
 		private System.Windows.Forms.GroupBox outputGroupBox;
 		private System.Windows.Forms.Button updateGltfButton;
-		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Panel nodesPanel;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ListBox nodeListBox;
 		private UserControls.CheckBoxProperty checkBoxProperty1;
