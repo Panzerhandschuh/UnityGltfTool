@@ -39,10 +39,11 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.label2 = new System.Windows.Forms.Label();
-			this.meshListBox = new System.Windows.Forms.ListBox();
+			this.nodeListBox = new System.Windows.Forms.ListBox();
 			this.outputGroupBox = new System.Windows.Forms.GroupBox();
 			this.checkBoxProperty1 = new UnityGltfTool.UserControls.CheckBoxProperty();
 			this.updateGltfButton = new System.Windows.Forms.Button();
+			this.gltfFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.inputGroupBox.SuspendLayout();
 			this.colliderGroupBox.SuspendLayout();
 			this.panel2.SuspendLayout();
@@ -66,19 +67,21 @@
 			// 
 			// gltfFileBrowse
 			// 
-			this.gltfFileBrowse.Location = new System.Drawing.Point(269, 16);
+			this.gltfFileBrowse.Location = new System.Drawing.Point(283, 16);
 			this.gltfFileBrowse.Name = "gltfFileBrowse";
 			this.gltfFileBrowse.Size = new System.Drawing.Size(75, 23);
 			this.gltfFileBrowse.TabIndex = 2;
 			this.gltfFileBrowse.Text = "Browse";
 			this.gltfFileBrowse.UseVisualStyleBackColor = true;
+			this.gltfFileBrowse.Click += new System.EventHandler(this.GltfFileBrowse_Click);
 			// 
 			// gltfFileTextBox
 			// 
 			this.gltfFileTextBox.Location = new System.Drawing.Point(63, 17);
 			this.gltfFileTextBox.Name = "gltfFileTextBox";
-			this.gltfFileTextBox.Size = new System.Drawing.Size(200, 20);
+			this.gltfFileTextBox.Size = new System.Drawing.Size(214, 20);
 			this.gltfFileTextBox.TabIndex = 1;
+			this.gltfFileTextBox.TextChanged += new System.EventHandler(this.GltfFileTextBox_TextChanged);
 			// 
 			// label1
 			// 
@@ -109,6 +112,7 @@
 			this.panel2.Controls.Add(this.label3);
 			this.panel2.Location = new System.Drawing.Point(133, 19);
 			this.panel2.Name = "panel2";
+			this.panel2.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
 			this.panel2.Size = new System.Drawing.Size(225, 150);
 			this.panel2.TabIndex = 3;
 			// 
@@ -117,7 +121,7 @@
 			this.colliderType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.colliderType.DataSource = null;
-			this.colliderType.Location = new System.Drawing.Point(0, 16);
+			this.colliderType.Location = new System.Drawing.Point(0, 19);
 			this.colliderType.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
 			this.colliderType.Name = "colliderType";
 			this.colliderType.PropertyName = "Collider Type";
@@ -134,18 +138,19 @@
 			// 
 			// colliderOptionsPanel
 			// 
-			this.colliderOptionsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.colliderOptionsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.colliderOptionsPanel.Location = new System.Drawing.Point(0, 37);
+			this.colliderOptionsPanel.Location = new System.Drawing.Point(0, 40);
 			this.colliderOptionsPanel.Name = "colliderOptionsPanel";
 			this.colliderOptionsPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.colliderOptionsPanel.Size = new System.Drawing.Size(225, 113);
+			this.colliderOptionsPanel.Size = new System.Drawing.Size(225, 110);
 			this.colliderOptionsPanel.TabIndex = 1;
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(0, 0);
+			this.label3.Location = new System.Drawing.Point(0, 3);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(83, 13);
 			this.label3.TabIndex = 0;
@@ -154,7 +159,7 @@
 			// panel1
 			// 
 			this.panel1.Controls.Add(this.label2);
-			this.panel1.Controls.Add(this.meshListBox);
+			this.panel1.Controls.Add(this.nodeListBox);
 			this.panel1.Location = new System.Drawing.Point(7, 19);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(120, 150);
@@ -165,20 +170,20 @@
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(0, 0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(47, 13);
+			this.label2.Size = new System.Drawing.Size(41, 13);
 			this.label2.TabIndex = 1;
-			this.label2.Text = "Meshes:";
+			this.label2.Text = "Nodes:";
 			// 
-			// meshListBox
+			// nodeListBox
 			// 
-			this.meshListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.nodeListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.meshListBox.FormattingEnabled = true;
-			this.meshListBox.Location = new System.Drawing.Point(0, 16);
-			this.meshListBox.Name = "meshListBox";
-			this.meshListBox.Size = new System.Drawing.Size(120, 134);
-			this.meshListBox.TabIndex = 0;
+			this.nodeListBox.FormattingEnabled = true;
+			this.nodeListBox.Location = new System.Drawing.Point(0, 16);
+			this.nodeListBox.Name = "nodeListBox";
+			this.nodeListBox.Size = new System.Drawing.Size(120, 134);
+			this.nodeListBox.TabIndex = 0;
 			// 
 			// outputGroupBox
 			// 
@@ -211,6 +216,10 @@
 			this.updateGltfButton.TabIndex = 3;
 			this.updateGltfButton.Text = "Update glTF";
 			this.updateGltfButton.UseVisualStyleBackColor = true;
+			// 
+			// gltfFileDialog
+			// 
+			this.gltfFileDialog.Filter = "glTF|*.gltf;*.glb";
 			// 
 			// Form1
 			// 
@@ -252,8 +261,9 @@
 		private System.Windows.Forms.Button updateGltfButton;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.ListBox meshListBox;
+		private System.Windows.Forms.ListBox nodeListBox;
 		private UserControls.CheckBoxProperty checkBoxProperty1;
+		private System.Windows.Forms.OpenFileDialog gltfFileDialog;
 	}
 }
 

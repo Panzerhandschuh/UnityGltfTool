@@ -8,6 +8,7 @@ namespace UnityGltfTool
 {
 	public enum CapsuleDirection
 	{
+		Default,
 		X,
 		Y,
 		Z

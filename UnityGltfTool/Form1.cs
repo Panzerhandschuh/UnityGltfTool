@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,6 +98,35 @@ namespace UnityGltfTool
 			meshControl.PropertyName = "Mesh";
 			// TODO: Get mesh list from gltf file
 			colliderOptionsPanel.Controls.Add(meshControl);
+		}
+
+		private void GltfFileBrowse_Click(object sender, EventArgs e)
+		{
+			var result = gltfFileDialog.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				var file = gltfFileDialog.FileName;
+				gltfFileTextBox.Text = file;
+				LoadGltfFile(file);
+			}
+		}
+
+		private void GltfFileTextBox_TextChanged(object sender, EventArgs e)
+		{
+			var file = gltfFileTextBox.Text;
+			if (HasGltfExtension(file) && File.Exists(file))
+				LoadGltfFile(file);
+		}
+
+		private bool HasGltfExtension(string file)
+		{
+			var extension = Path.GetExtension(file);
+			return extension == ".gltf" || extension == ".glb";
+		}
+
+		private void LoadGltfFile(string file)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
