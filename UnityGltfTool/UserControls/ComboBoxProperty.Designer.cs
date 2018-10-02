@@ -48,7 +48,7 @@
 			this.propertyValue.FormattingEnabled = true;
 			this.propertyValue.Location = new System.Drawing.Point(80, 0);
 			this.propertyValue.Name = "propertyValue";
-			this.propertyValue.Size = new System.Drawing.Size(120, 21);
+			this.propertyValue.Size = new System.Drawing.Size(145, 21);
 			this.propertyValue.TabIndex = 1;
 			this.propertyValue.SelectedIndexChanged += new System.EventHandler(this.PropertyValue_SelectedIndexChanged);
 			// 
@@ -58,8 +58,9 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.propertyValue);
 			this.Controls.Add(this.propertyLabel);
+			this.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
 			this.Name = "ComboBoxProperty";
-			this.Size = new System.Drawing.Size(200, 21);
+			this.Size = new System.Drawing.Size(225, 21);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

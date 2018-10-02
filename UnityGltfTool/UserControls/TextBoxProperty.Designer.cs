@@ -47,7 +47,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.propertyValue.Location = new System.Drawing.Point(80, 0);
 			this.propertyValue.Name = "propertyValue";
-			this.propertyValue.Size = new System.Drawing.Size(120, 20);
+			this.propertyValue.Size = new System.Drawing.Size(145, 20);
 			this.propertyValue.TabIndex = 1;
 			// 
 			// TextBoxProperty
@@ -56,8 +56,9 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.propertyValue);
 			this.Controls.Add(this.propertyLabel);
+			this.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
 			this.Name = "TextBoxProperty";
-			this.Size = new System.Drawing.Size(200, 20);
+			this.Size = new System.Drawing.Size(225, 20);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

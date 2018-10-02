@@ -59,7 +59,7 @@
 			this.inputGroupBox.Controls.Add(this.label1);
 			this.inputGroupBox.Location = new System.Drawing.Point(13, 13);
 			this.inputGroupBox.Name = "inputGroupBox";
-			this.inputGroupBox.Size = new System.Drawing.Size(775, 50);
+			this.inputGroupBox.Size = new System.Drawing.Size(366, 50);
 			this.inputGroupBox.TabIndex = 0;
 			this.inputGroupBox.TabStop = false;
 			this.inputGroupBox.Text = "Input";
@@ -97,7 +97,7 @@
 			this.colliderGroupBox.Controls.Add(this.panel1);
 			this.colliderGroupBox.Location = new System.Drawing.Point(13, 70);
 			this.colliderGroupBox.Name = "colliderGroupBox";
-			this.colliderGroupBox.Size = new System.Drawing.Size(775, 183);
+			this.colliderGroupBox.Size = new System.Drawing.Size(366, 183);
 			this.colliderGroupBox.TabIndex = 1;
 			this.colliderGroupBox.TabStop = false;
 			this.colliderGroupBox.Text = "Collider Configuration";
@@ -109,7 +109,7 @@
 			this.panel2.Controls.Add(this.label3);
 			this.panel2.Location = new System.Drawing.Point(133, 19);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(259, 150);
+			this.panel2.Size = new System.Drawing.Size(225, 150);
 			this.panel2.TabIndex = 3;
 			// 
 			// colliderType
@@ -118,6 +118,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.colliderType.DataSource = null;
 			this.colliderType.Location = new System.Drawing.Point(0, 16);
+			this.colliderType.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
 			this.colliderType.Name = "colliderType";
 			this.colliderType.PropertyName = "Collider Type";
 			this.colliderType.PropertyValue.AddRange(new object[] {
@@ -126,8 +127,9 @@
             "Sphere",
             "Capsule",
             "Mesh"});
+			this.colliderType.PropertyValueLocation = 80;
 			this.colliderType.SelectedItem = "None";
-			this.colliderType.Size = new System.Drawing.Size(259, 21);
+			this.colliderType.Size = new System.Drawing.Size(225, 21);
 			this.colliderType.TabIndex = 2;
 			// 
 			// colliderOptionsPanel
@@ -136,7 +138,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.colliderOptionsPanel.Location = new System.Drawing.Point(0, 37);
 			this.colliderOptionsPanel.Name = "colliderOptionsPanel";
-			this.colliderOptionsPanel.Size = new System.Drawing.Size(259, 113);
+			this.colliderOptionsPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+			this.colliderOptionsPanel.Size = new System.Drawing.Size(225, 113);
 			this.colliderOptionsPanel.TabIndex = 1;
 			// 
 			// label3
@@ -184,7 +187,7 @@
 			this.outputGroupBox.Controls.Add(this.checkBoxProperty1);
 			this.outputGroupBox.Location = new System.Drawing.Point(13, 260);
 			this.outputGroupBox.Name = "outputGroupBox";
-			this.outputGroupBox.Size = new System.Drawing.Size(775, 49);
+			this.outputGroupBox.Size = new System.Drawing.Size(366, 49);
 			this.outputGroupBox.TabIndex = 2;
 			this.outputGroupBox.TabStop = false;
 			this.outputGroupBox.Text = "Output";
@@ -192,11 +195,12 @@
 			// checkBoxProperty1
 			// 
 			this.checkBoxProperty1.Location = new System.Drawing.Point(7, 20);
+			this.checkBoxProperty1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
 			this.checkBoxProperty1.Name = "checkBoxProperty1";
 			this.checkBoxProperty1.PropertyName = "Convert Images to DDS";
-			this.checkBoxProperty1.PropertyValue = false;
-			this.checkBoxProperty1.PropertyValueLocation = 130;
-			this.checkBoxProperty1.Size = new System.Drawing.Size(200, 14);
+			this.checkBoxProperty1.PropertyValue = true;
+			this.checkBoxProperty1.PropertyValueLocation = 125;
+			this.checkBoxProperty1.Size = new System.Drawing.Size(200, 20);
 			this.checkBoxProperty1.TabIndex = 0;
 			// 
 			// updateGltfButton
@@ -212,11 +216,13 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.ClientSize = new System.Drawing.Size(391, 347);
 			this.Controls.Add(this.updateGltfButton);
 			this.Controls.Add(this.outputGroupBox);
 			this.Controls.Add(this.colliderGroupBox);
 			this.Controls.Add(this.inputGroupBox);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
 			this.Name = "Form1";
 			this.Text = "Unity glTF Tool";
 			this.inputGroupBox.ResumeLayout(false);

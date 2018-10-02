@@ -51,7 +51,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(0, 4);
+			this.label2.Location = new System.Drawing.Point(0, 3);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(15, 13);
 			this.label2.TabIndex = 1;
@@ -67,7 +67,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(50, 4);
+			this.label3.Location = new System.Drawing.Point(50, 3);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(15, 13);
 			this.label3.TabIndex = 3;
@@ -83,7 +83,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(100, 4);
+			this.label4.Location = new System.Drawing.Point(100, 3);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(15, 13);
 			this.label4.TabIndex = 5;
@@ -115,6 +115,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.propertyValuePanel);
 			this.Controls.Add(this.propertyLabel);
+			this.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
 			this.Name = "VectorProperty";
 			this.Size = new System.Drawing.Size(225, 20);
 			this.propertyValuePanel.ResumeLayout(false);
