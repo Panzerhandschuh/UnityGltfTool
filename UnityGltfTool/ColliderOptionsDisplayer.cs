@@ -224,7 +224,7 @@ namespace UnityGltfTool
 
 		private int? GetInt(string str)
 		{
-			if (int.TryParse(str, out int result))
+			if (int.TryParse(str, out var result))
 				return result;
 
 			return null;
@@ -232,7 +232,7 @@ namespace UnityGltfTool
 
 		private float? GetFloat(string str)
 		{
-			if (float.TryParse(str, out float result))
+			if (float.TryParse(str, out var result))
 				return result;
 
 			return null;

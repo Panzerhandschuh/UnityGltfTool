@@ -45,7 +45,7 @@ namespace UnityGltfTool.UserControls
 
 		protected override void OnLeave(EventArgs e)
 		{
-			if (string.IsNullOrEmpty(Text) || float.TryParse(Text, out float result))
+			if (string.IsNullOrEmpty(Text) || float.TryParse(Text, out var result))
 				previousText = Text;
 			else
 				Text = previousText;

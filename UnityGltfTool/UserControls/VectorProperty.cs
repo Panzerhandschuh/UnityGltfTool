@@ -34,9 +34,9 @@ namespace UnityGltfTool.UserControls
 		{
 			get
 			{
-				var successX = float.TryParse(propertyValueX.Text, out float x);
-				var successY = float.TryParse(propertyValueY.Text, out float y);
-				var successZ = float.TryParse(propertyValueZ.Text, out float z);
+				var successX = float.TryParse(propertyValueX.Text, out var x);
+				var successY = float.TryParse(propertyValueY.Text, out var y);
+				var successZ = float.TryParse(propertyValueZ.Text, out var z);
 				if (successX || successY || successZ) // Only one value needs to be set for this property to be valid
 					return new Vector3(x, y, z);
 

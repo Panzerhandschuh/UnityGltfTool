@@ -83,7 +83,7 @@ namespace UnityGltfTool
 
 		public Unity_collidersCollider GetCollider(int nodeIndex)
 		{
-			if (colliders.TryGetValue(nodeIndex, out Unity_collidersCollider collider))
+			if (colliders.TryGetValue(nodeIndex, out var collider))
 				return collider;
 
 			return null;

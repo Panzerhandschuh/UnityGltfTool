@@ -41,7 +41,7 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.nodeListBox = new System.Windows.Forms.ListBox();
 			this.outputGroupBox = new System.Windows.Forms.GroupBox();
-			this.checkBoxProperty1 = new UnityGltfTool.UserControls.CheckBoxProperty();
+			this.convertImagesToDdsProperty = new UnityGltfTool.UserControls.CheckBoxProperty();
 			this.updateGltfButton = new System.Windows.Forms.Button();
 			this.gltfFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.inputGroupBox.SuspendLayout();
@@ -186,7 +186,7 @@
 			// 
 			this.outputGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.outputGroupBox.Controls.Add(this.checkBoxProperty1);
+			this.outputGroupBox.Controls.Add(this.convertImagesToDdsProperty);
 			this.outputGroupBox.Enabled = false;
 			this.outputGroupBox.Location = new System.Drawing.Point(13, 260);
 			this.outputGroupBox.Name = "outputGroupBox";
@@ -195,16 +195,16 @@
 			this.outputGroupBox.TabStop = false;
 			this.outputGroupBox.Text = "Output";
 			// 
-			// checkBoxProperty1
+			// convertImagesToDdsProperty
 			// 
-			this.checkBoxProperty1.Location = new System.Drawing.Point(7, 20);
-			this.checkBoxProperty1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-			this.checkBoxProperty1.Name = "checkBoxProperty1";
-			this.checkBoxProperty1.PropertyName = "Convert Images to DDS";
-			this.checkBoxProperty1.PropertyValue = true;
-			this.checkBoxProperty1.PropertyValueLocation = 125;
-			this.checkBoxProperty1.Size = new System.Drawing.Size(200, 20);
-			this.checkBoxProperty1.TabIndex = 0;
+			this.convertImagesToDdsProperty.Location = new System.Drawing.Point(7, 20);
+			this.convertImagesToDdsProperty.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+			this.convertImagesToDdsProperty.Name = "convertImagesToDdsProperty";
+			this.convertImagesToDdsProperty.PropertyName = "Convert Images to DDS";
+			this.convertImagesToDdsProperty.PropertyValue = true;
+			this.convertImagesToDdsProperty.PropertyValueLocation = 125;
+			this.convertImagesToDdsProperty.Size = new System.Drawing.Size(200, 20);
+			this.convertImagesToDdsProperty.TabIndex = 0;
 			// 
 			// updateGltfButton
 			// 
@@ -262,7 +262,7 @@
 		private System.Windows.Forms.Panel nodesPanel;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ListBox nodeListBox;
-		private UserControls.CheckBoxProperty checkBoxProperty1;
+		private UserControls.CheckBoxProperty convertImagesToDdsProperty;
 		private System.Windows.Forms.OpenFileDialog gltfFileDialog;
 	}
 }
