@@ -124,9 +124,9 @@ namespace UnityGltfTool
 			return centerControl;
 		}
 
-		private TextBoxProperty AddRadiusControl(float? radius)
+		private NumericTextBoxProperty AddRadiusControl(float? radius)
 		{
-			var radiusControl = new TextBoxProperty();
+			var radiusControl = new NumericTextBoxProperty();
 			radiusControl.PropertyName = "Radius";
 			panel.Controls.Add(radiusControl);
 
@@ -136,9 +136,9 @@ namespace UnityGltfTool
 			return radiusControl;
 		}
 
-		private TextBoxProperty AddHeightControl(float? height)
+		private NumericTextBoxProperty AddHeightControl(float? height)
 		{
-			var heightControl = new TextBoxProperty();
+			var heightControl = new NumericTextBoxProperty();
 			heightControl.PropertyName = "Height";
 			panel.Controls.Add(heightControl);
 

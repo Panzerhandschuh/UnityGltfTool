@@ -58,6 +58,18 @@
     <Compile Include="ColliderManager.cs" />
     <Compile Include="ColliderOptionsDisplayer.cs" />
     <Compile Include="ColliderType.cs" />
+    <Compile Include="UserControls\NumericTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\NumericTextBox.Designer.cs">
+      <DependentUpon>NumericTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NumericTextBoxProperty.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\NumericTextBoxProperty.Designer.cs">
+      <DependentUpon>NumericTextBoxProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ColliderUtil.cs" />
     <Compile Include="Utils\ExtensionUtil.cs" />
     <Compile Include="Form1.cs">
@@ -112,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ComboBoxProperty.resx">
       <DependentUpon>ComboBoxProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\NumericTextBoxProperty.resx">
+      <DependentUpon>NumericTextBoxProperty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\TextBoxProperty.resx">
       <DependentUpon>TextBoxProperty.cs</DependentUpon>

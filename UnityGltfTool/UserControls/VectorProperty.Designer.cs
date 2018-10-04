@@ -30,12 +30,12 @@
 		{
 			this.propertyLabel = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.propertyValueX = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.propertyValueY = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
-			this.propertyValueZ = new System.Windows.Forms.TextBox();
 			this.propertyValuePanel = new System.Windows.Forms.Panel();
+			this.propertyValueX = new UnityGltfTool.UserControls.NumericTextBox();
+			this.propertyValueY = new UnityGltfTool.UserControls.NumericTextBox();
+			this.propertyValueZ = new UnityGltfTool.UserControls.NumericTextBox();
 			this.propertyValuePanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -57,14 +57,6 @@
 			this.label2.TabIndex = 1;
 			this.label2.Text = "x:";
 			// 
-			// propertyValueX
-			// 
-			this.propertyValueX.Location = new System.Drawing.Point(15, 0);
-			this.propertyValueX.Name = "propertyValueX";
-			this.propertyValueX.Size = new System.Drawing.Size(30, 20);
-			this.propertyValueX.TabIndex = 2;
-			this.propertyValueX.TextChanged += new System.EventHandler(this.PropertyValueX_TextChanged);
-			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
@@ -73,14 +65,6 @@
 			this.label3.Size = new System.Drawing.Size(15, 13);
 			this.label3.TabIndex = 3;
 			this.label3.Text = "y:";
-			// 
-			// propertyValueY
-			// 
-			this.propertyValueY.Location = new System.Drawing.Point(65, 0);
-			this.propertyValueY.Name = "propertyValueY";
-			this.propertyValueY.Size = new System.Drawing.Size(30, 20);
-			this.propertyValueY.TabIndex = 4;
-			this.propertyValueY.TextChanged += new System.EventHandler(this.PropertyValueY_TextChanged);
 			// 
 			// label4
 			// 
@@ -91,26 +75,39 @@
 			this.label4.TabIndex = 5;
 			this.label4.Text = "z:";
 			// 
+			// propertyValuePanel
+			// 
+			this.propertyValuePanel.Controls.Add(this.propertyValueZ);
+			this.propertyValuePanel.Controls.Add(this.propertyValueY);
+			this.propertyValuePanel.Controls.Add(this.propertyValueX);
+			this.propertyValuePanel.Controls.Add(this.label2);
+			this.propertyValuePanel.Controls.Add(this.label4);
+			this.propertyValuePanel.Controls.Add(this.label3);
+			this.propertyValuePanel.Location = new System.Drawing.Point(80, 0);
+			this.propertyValuePanel.Name = "propertyValuePanel";
+			this.propertyValuePanel.Size = new System.Drawing.Size(145, 20);
+			this.propertyValuePanel.TabIndex = 7;
+			// 
+			// propertyValueX
+			// 
+			this.propertyValueX.Location = new System.Drawing.Point(15, 0);
+			this.propertyValueX.Name = "propertyValueX";
+			this.propertyValueX.Size = new System.Drawing.Size(30, 20);
+			this.propertyValueX.TabIndex = 2;
+			// 
+			// propertyValueY
+			// 
+			this.propertyValueY.Location = new System.Drawing.Point(65, 0);
+			this.propertyValueY.Name = "propertyValueY";
+			this.propertyValueY.Size = new System.Drawing.Size(30, 20);
+			this.propertyValueY.TabIndex = 4;
+			// 
 			// propertyValueZ
 			// 
 			this.propertyValueZ.Location = new System.Drawing.Point(115, 0);
 			this.propertyValueZ.Name = "propertyValueZ";
 			this.propertyValueZ.Size = new System.Drawing.Size(30, 20);
 			this.propertyValueZ.TabIndex = 6;
-			this.propertyValueZ.TextChanged += new System.EventHandler(this.PropertyValueZ_TextChanged);
-			// 
-			// propertyValuePanel
-			// 
-			this.propertyValuePanel.Controls.Add(this.label2);
-			this.propertyValuePanel.Controls.Add(this.propertyValueZ);
-			this.propertyValuePanel.Controls.Add(this.propertyValueX);
-			this.propertyValuePanel.Controls.Add(this.label4);
-			this.propertyValuePanel.Controls.Add(this.label3);
-			this.propertyValuePanel.Controls.Add(this.propertyValueY);
-			this.propertyValuePanel.Location = new System.Drawing.Point(80, 0);
-			this.propertyValuePanel.Name = "propertyValuePanel";
-			this.propertyValuePanel.Size = new System.Drawing.Size(145, 20);
-			this.propertyValuePanel.TabIndex = 7;
 			// 
 			// VectorProperty
 			// 
@@ -132,11 +129,11 @@
 
 		private System.Windows.Forms.Label propertyLabel;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox propertyValueX;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.TextBox propertyValueY;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.TextBox propertyValueZ;
 		private System.Windows.Forms.Panel propertyValuePanel;
+		private NumericTextBox propertyValueX;
+		private NumericTextBox propertyValueZ;
+		private NumericTextBox propertyValueY;
 	}
 }
