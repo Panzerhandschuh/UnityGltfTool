@@ -26,10 +26,22 @@ namespace UnityGltfTool
 			var boxCollider = collider.BoxCollider;
 
 			var centerControl = AddCenterControl(boxCollider.Center);
-			centerControl.PropertyChanged += (x, y) => boxCollider.Center = GetFloatArray(centerControl.PropertyValue);
+			centerControl.PropertyChanged += (x, y) => UpdateBoxCenter(boxCollider, GetFloatArray(centerControl.PropertyValue));
 
 			var sizeControl = AddSizeControl(boxCollider.Size);
-			sizeControl.PropertyChanged += (x, y) => boxCollider.Size = GetFloatArray(sizeControl.PropertyValue);
+			sizeControl.PropertyChanged += (x, y) => UpdateBoxSize(boxCollider, GetFloatArray(sizeControl.PropertyValue));
+		}
+
+		private void UpdateBoxCenter(Unity_collidersBoxCollider boxCollider, float[] center)
+		{
+			if (center != null)
+				boxCollider.Center = center;
+		}
+
+		private void UpdateBoxSize(Unity_collidersBoxCollider boxCollider, float[] size)
+		{
+			if (size != null)
+				boxCollider.Size = size;
 		}
 
 		private VectorProperty AddSizeControl(float[] size)
@@ -49,10 +61,16 @@ namespace UnityGltfTool
 			var sphereCollider = collider.SphereCollider;
 
 			var centerControl = AddCenterControl(sphereCollider.Center);
-			centerControl.PropertyChanged += (x, y) => sphereCollider.Center = GetFloatArray(centerControl.PropertyValue);
+			centerControl.PropertyChanged += (x, y) => UpdateSphereCenter(sphereCollider, GetFloatArray(centerControl.PropertyValue));
 
 			var radiusControl = AddRadiusControl(sphereCollider.Radius);
 			radiusControl.PropertyChanged += (x, y) => sphereCollider.Radius = GetFloat(radiusControl.PropertyValue);
+		}
+
+		private void UpdateSphereCenter(Unity_collidersSphereCollider sphereCollider, float[] center)
+		{
+			if (center != null)
+				sphereCollider.Center = center;
 		}
 
 		public void DisplayCapsuleOptions()
@@ -60,7 +78,7 @@ namespace UnityGltfTool
 			var capsuleCollider = collider.CapsuleCollider;
 
 			var centerControl = AddCenterControl(capsuleCollider.Center);
-			centerControl.PropertyChanged += (x, y) => capsuleCollider.Center = GetFloatArray(centerControl.PropertyValue);
+			centerControl.PropertyChanged += (x, y) => UpdateCapsuleCenter(capsuleCollider, GetFloatArray(centerControl.PropertyValue));
 
 			var radiusControl = AddRadiusControl(capsuleCollider.Radius);
 			radiusControl.PropertyChanged += (x, y) => capsuleCollider.Radius = GetFloat(radiusControl.PropertyValue);
@@ -70,6 +88,12 @@ namespace UnityGltfTool
 
 			var directionControl = AddDirectionControl(capsuleCollider.Direction);
 			directionControl.PropertyChanged += (x, y) => capsuleCollider.Direction = GetDirection((CapsuleDirection)directionControl.PropertyValue);
+		}
+
+		private void UpdateCapsuleCenter(Unity_collidersCapsuleCollider capsuleCollider, float[] center)
+		{
+			if (center != null)
+				capsuleCollider.Center = center;
 		}
 
 		private Unity_collidersCapsuleCollider.DirectionEnum? GetDirection(CapsuleDirection direction)
