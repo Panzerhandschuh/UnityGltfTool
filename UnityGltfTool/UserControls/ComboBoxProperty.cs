@@ -30,13 +30,10 @@ namespace UnityGltfTool.UserControls
 			}
 		}
 
-		[Category("Design")]
-		[Description("Property Value")]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-		[Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
-		public ComboBox.ObjectCollection PropertyValue
+		public int PropertyValue
 		{
-			get { return propertyValue.Items; }
+			get { return propertyValue.SelectedIndex; }
+			set { propertyValue.SelectedIndex = value; }
 		}
 
 		[Category("Design")]
@@ -53,13 +50,7 @@ namespace UnityGltfTool.UserControls
 			set { propertyValue.DataSource = value; }
 		}
 
-		public object SelectedItem
-		{
-			get { return propertyValue.SelectedItem; }
-			set { propertyValue.SelectedItem = value; }
-		}
-
-		public event EventHandler SelectedIndexChanged;
+		public event EventHandler PropertyChanged;
 
 		public ComboBoxProperty()
 		{
@@ -76,7 +67,7 @@ namespace UnityGltfTool.UserControls
 
 		private void PropertyValue_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			SelectedIndexChanged?.Invoke(this, e);
+			PropertyChanged?.Invoke(this, e);
 		}
 	}
 }

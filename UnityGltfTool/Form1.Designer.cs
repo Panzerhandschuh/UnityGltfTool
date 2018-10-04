@@ -34,7 +34,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.colliderGroupBox = new System.Windows.Forms.GroupBox();
 			this.colliderOptionsPanel = new System.Windows.Forms.Panel();
-			this.colliderType = new UnityGltfTool.UserControls.ComboBoxProperty();
+			this.colliderTypeProperty = new UnityGltfTool.UserControls.ComboBoxProperty();
 			this.colliderTypeOptionsPanel = new System.Windows.Forms.FlowLayoutPanel();
 			this.label3 = new System.Windows.Forms.Label();
 			this.nodesPanel = new System.Windows.Forms.Panel();
@@ -108,7 +108,7 @@
 			// 
 			// colliderOptionsPanel
 			// 
-			this.colliderOptionsPanel.Controls.Add(this.colliderType);
+			this.colliderOptionsPanel.Controls.Add(this.colliderTypeProperty);
 			this.colliderOptionsPanel.Controls.Add(this.colliderTypeOptionsPanel);
 			this.colliderOptionsPanel.Controls.Add(this.label3);
 			this.colliderOptionsPanel.Enabled = false;
@@ -118,25 +118,19 @@
 			this.colliderOptionsPanel.Size = new System.Drawing.Size(225, 150);
 			this.colliderOptionsPanel.TabIndex = 3;
 			// 
-			// colliderType
+			// colliderTypeProperty
 			// 
-			this.colliderType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.colliderTypeProperty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.colliderType.DataSource = null;
-			this.colliderType.Location = new System.Drawing.Point(0, 19);
-			this.colliderType.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-			this.colliderType.Name = "colliderType";
-			this.colliderType.PropertyName = "Collider Type";
-			this.colliderType.PropertyValue.AddRange(new object[] {
-            "None",
-            "Box",
-            "Sphere",
-            "Capsule",
-            "Mesh"});
-			this.colliderType.PropertyValueLocation = 80;
-			this.colliderType.SelectedItem = "None";
-			this.colliderType.Size = new System.Drawing.Size(225, 21);
-			this.colliderType.TabIndex = 2;
+			this.colliderTypeProperty.DataSource = null;
+			this.colliderTypeProperty.Location = new System.Drawing.Point(0, 19);
+			this.colliderTypeProperty.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+			this.colliderTypeProperty.Name = "colliderTypeProperty";
+			this.colliderTypeProperty.PropertyName = "Collider Type";
+			this.colliderTypeProperty.PropertyValue = -1;
+			this.colliderTypeProperty.PropertyValueLocation = 80;
+			this.colliderTypeProperty.Size = new System.Drawing.Size(225, 21);
+			this.colliderTypeProperty.TabIndex = 2;
 			// 
 			// colliderTypeOptionsPanel
 			// 
@@ -221,6 +215,7 @@
 			this.updateGltfButton.TabIndex = 3;
 			this.updateGltfButton.Text = "Update glTF";
 			this.updateGltfButton.UseVisualStyleBackColor = true;
+			this.updateGltfButton.Click += new System.EventHandler(this.UpdateGltfButton_Click);
 			// 
 			// gltfFileDialog
 			// 
@@ -261,7 +256,7 @@
 		private System.Windows.Forms.Panel colliderOptionsPanel;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.FlowLayoutPanel colliderTypeOptionsPanel;
-		private UserControls.ComboBoxProperty colliderType;
+		private UserControls.ComboBoxProperty colliderTypeProperty;
 		private System.Windows.Forms.GroupBox outputGroupBox;
 		private System.Windows.Forms.Button updateGltfButton;
 		private System.Windows.Forms.Panel nodesPanel;

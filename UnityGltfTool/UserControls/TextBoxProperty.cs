@@ -45,9 +45,16 @@ namespace UnityGltfTool.UserControls
 			set { propertyValue.Location = new Point(value, propertyValue.Location.Y); }
 		}
 
+		public event EventHandler PropertyChanged;
+
 		public TextBoxProperty()
 		{
 			InitializeComponent();
+		}
+
+		private void PropertyValue_TextChanged(object sender, EventArgs e)
+		{
+			PropertyChanged?.Invoke(this, e);
 		}
 	}
 }

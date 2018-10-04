@@ -49,6 +49,7 @@
 			this.propertyValue.Name = "propertyValue";
 			this.propertyValue.Size = new System.Drawing.Size(145, 20);
 			this.propertyValue.TabIndex = 1;
+			this.propertyValue.TextChanged += new System.EventHandler(this.PropertyValue_TextChanged);
 			// 
 			// TextBoxProperty
 			// 

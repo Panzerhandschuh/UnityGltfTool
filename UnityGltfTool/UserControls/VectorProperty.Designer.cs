@@ -63,6 +63,7 @@
 			this.propertyValueX.Name = "propertyValueX";
 			this.propertyValueX.Size = new System.Drawing.Size(30, 20);
 			this.propertyValueX.TabIndex = 2;
+			this.propertyValueX.TextChanged += new System.EventHandler(this.PropertyValueX_TextChanged);
 			// 
 			// label3
 			// 
@@ -79,6 +80,7 @@
 			this.propertyValueY.Name = "propertyValueY";
 			this.propertyValueY.Size = new System.Drawing.Size(30, 20);
 			this.propertyValueY.TabIndex = 4;
+			this.propertyValueY.TextChanged += new System.EventHandler(this.PropertyValueY_TextChanged);
 			// 
 			// label4
 			// 
@@ -95,6 +97,7 @@
 			this.propertyValueZ.Name = "propertyValueZ";
 			this.propertyValueZ.Size = new System.Drawing.Size(30, 20);
 			this.propertyValueZ.TabIndex = 6;
+			this.propertyValueZ.TextChanged += new System.EventHandler(this.PropertyValueZ_TextChanged);
 			// 
 			// propertyValuePanel
 			// 

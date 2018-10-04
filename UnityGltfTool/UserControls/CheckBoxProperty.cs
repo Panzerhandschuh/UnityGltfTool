@@ -45,9 +45,16 @@ namespace UnityGltfTool.UserControls
 			set { propertyValue.Location = new Point(value, propertyValue.Location.Y); }
 		}
 
+		public event EventHandler PropertyChanged;
+
 		public CheckBoxProperty()
 		{
 			InitializeComponent();
+		}
+
+		private void PropertyValue_CheckedChanged(object sender, EventArgs e)
+		{
+			PropertyChanged?.Invoke(this, e);
 		}
 	}
 }

@@ -42,6 +42,7 @@
 			this.propertyValue.Size = new System.Drawing.Size(15, 14);
 			this.propertyValue.TabIndex = 0;
 			this.propertyValue.UseVisualStyleBackColor = true;
+			this.propertyValue.CheckedChanged += new System.EventHandler(this.PropertyValue_CheckedChanged);
 			// 
 			// propertyLabel
 			// 
