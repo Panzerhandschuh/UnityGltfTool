@@ -58,6 +58,9 @@
     <Compile Include="ColliderManager.cs" />
     <Compile Include="ColliderOptionsDisplayer.cs" />
     <Compile Include="ColliderType.cs" />
+    <Compile Include="ColliderUpdater.cs" />
+    <Compile Include="TextureUtils\TextureConverter.cs" />
+    <Compile Include="TextureUtils\TextureFormat.cs" />
     <Compile Include="UserControls\NumericTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -147,6 +150,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="texconv.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

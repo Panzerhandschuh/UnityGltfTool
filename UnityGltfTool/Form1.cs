@@ -149,9 +149,12 @@ namespace UnityGltfTool
 
 		private void UpdateGltfButton_Click(object sender, EventArgs e)
 		{
+			var gltfPath = gltfFileTextBox.Text;
 			var colliders = colliderManager.Colliders;
-			var updater = new GltfUpdater(gltf, colliders);
-			updater.Update(gltfFileTextBox.Text, convertImagesToDdsProperty.PropertyValue);
+			var updater = new GltfUpdater(gltfPath, gltf, colliders);
+
+			var convertImagesToDds = convertImagesToDdsProperty.PropertyValue;
+			updater.Update(convertImagesToDds);
 
 			MessageBox.Show("Updated glTF file", "Success", MessageBoxButtons.OK);
 		}
