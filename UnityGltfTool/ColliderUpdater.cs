@@ -24,6 +24,7 @@ namespace UnityGltfTool
 		{
 			UpdateExtensionsUsedAndRequired();
 			UpdateNodeExtensions();
+			RemoveMeshNodesConvertedToColliders();
 		}
 
 		private void UpdateExtensionsUsedAndRequired()
@@ -101,6 +102,51 @@ namespace UnityGltfTool
 
 			if (!node.Extensions.Any())
 				node.Extensions = null;
+		}
+
+		/// <summary>
+		/// Removes nodes that reference meshes that have been converted to colliders
+		/// </summary>
+		private void RemoveMeshNodesConvertedToColliders()
+		{
+			var meshColliders = colliders.Values.Where(x => x.MeshCollider?.Mesh != null).Select(x => x.MeshCollider);
+			foreach (var meshCollider in meshColliders)
+			{
+				var nodeIndex = Array.FindIndex(gltf.Nodes, x => x.Mesh == meshCollider.Mesh);
+				if (nodeIndex != -1)
+					RemoveNode(nodeIndex);
+			}
+		}
+
+		private void RemoveNode(int nodeIndex)
+		{
+			// Remove node
+			var nodes = gltf.Nodes.ToList();
+			nodes.RemoveAt(nodeIndex);
+			gltf.Nodes = nodes.ToArray();
+
+			// Remove scene node
+			var scene = gltf.Scenes[gltf.Scene.Value];
+			var sceneNodes = scene.Nodes.ToList();
+			if (sceneNodes.Contains(nodeIndex))
+			{
+				sceneNodes.Remove(nodeIndex);
+				scene.Nodes = sceneNodes.ToArray();
+			}
+
+			// Remove child references
+			foreach (var node in gltf.Nodes)
+			{
+				if (node.Children == null)
+					continue;
+
+				var childNodes = node.Children.ToList();
+				if (childNodes.Contains(nodeIndex))
+				{
+					childNodes.Remove(nodeIndex);
+					node.Children = childNodes.ToArray();
+				}
+			}
 		}
 	}
 }
