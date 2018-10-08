@@ -70,10 +70,11 @@ namespace UnityGltfTool.TextureUtils
 				return;
 
 			var imageIndex = texture.Source.Value;
-			ConvertImageToDds(imageIndex, format);
-
-			AddExtensionsUsedAndRequired();
-			ReplaceTextureSourceWithDdsExtension(texture);
+			if (ConvertImageToDds(imageIndex, format))
+			{
+				AddExtensionsUsedAndRequired();
+				ReplaceTextureSourceWithDdsExtension(texture);
+			}
 		}
 
 		private void AddExtensionsUsedAndRequired()
@@ -104,13 +105,13 @@ namespace UnityGltfTool.TextureUtils
 			texture.Extensions[ddsExtensionName] = ddsExtension;
 		}
 
-		private void ConvertImageToDds(int imageIndex, TextureFormat format)
+		private bool ConvertImageToDds(int imageIndex, TextureFormat format)
 		{
 			var image = gltf.Images[imageIndex];
 
 			var uri = image.Uri;
 			if (uri.StartsWith("data:image/"))
-				return;
+				return false;
 
 			var assetPath = GetAssetPath(uri);
 			var formatStr = GetFormatString(format);
@@ -127,6 +128,8 @@ namespace UnityGltfTool.TextureUtils
 			var ddsUri = Path.ChangeExtension(uri, ".dds");
 			image.Uri = ddsUri;
 			image.Name = ddsUri;
+
+			return true;
 		}
 
 		private void OnFinishedConvertingImage(string assetPath)
