@@ -184,7 +184,7 @@ namespace UnityGltfTool
 			convexControl.PropertyChanged += (x, y) => meshCollider.Convex = convexControl.PropertyValue;
 
 			var meshControl = AddMeshControl(meshes, meshCollider.Mesh);
-			meshControl.PropertyChanged += (x, y) => meshCollider.Mesh = meshControl.PropertyValue;
+			meshControl.PropertyChanged += (x, y) => meshCollider.Mesh = GetMesh(meshControl.PropertyValue);
 		}
 
 		private CheckBoxProperty AddConvexControl(bool? convex)
@@ -203,13 +203,29 @@ namespace UnityGltfTool
 		{
 			var meshControl = new ComboBoxProperty();
 			meshControl.PropertyName = "Mesh";
-			meshControl.DataSource = meshes;
+			meshControl.DataSource = GetMeshDataSource(meshes);
 			panel.Controls.Add(meshControl);
 
 			if (mesh.HasValue)
 				meshControl.PropertyValue = mesh.Value;
 
 			return meshControl;
+		}
+
+		private List<string> GetMeshDataSource(IEnumerable<string> meshes)
+		{
+			var dataSource = new List<string>() { string.Empty };
+			dataSource.AddRange(meshes);
+
+			return dataSource;
+		}
+
+		private int? GetMesh(int meshIndex)
+		{
+			if (meshIndex == 0)
+				return null;
+
+			return meshIndex - 1;
 		}
 
 		private Vector3 GetVector3(float[] arr)
