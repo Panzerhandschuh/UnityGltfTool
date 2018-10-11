@@ -113,6 +113,10 @@ namespace UnityGltfTool.TextureUtils
 			if (uri.StartsWith("data:image/"))
 				return false;
 
+			var uriExtension = Path.GetExtension(uri);
+			if (uriExtension == ".dds") // Image is already dds
+				return true;
+
 			var assetPath = GetAssetPath(uri);
 			var formatStr = GetFormatString(format);
 			var outputDir = GetGltfDir();
