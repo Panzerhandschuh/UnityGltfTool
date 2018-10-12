@@ -123,7 +123,7 @@ namespace UnityGltfTool.TextureUtils
 
 			var startInfo = new ProcessStartInfo();
 			startInfo.FileName = "texconv.exe";
-			startInfo.Arguments = $"-hflip -vflip -pow2 -f {formatStr} -o {outputDir} {assetPath}";
+			startInfo.Arguments = $"-hflip -vflip -pow2 -f {formatStr} -o \"{outputDir}\" \"{assetPath}\"";
 
 			var process = Process.Start(startInfo);
 			process.EnableRaisingEvents = true;
