@@ -127,26 +127,31 @@ namespace UnityGltfTool
 
 			// Remove scene node
 			var scene = gltf.Scenes[gltf.Scene.Value];
-			var sceneNodes = scene.Nodes.ToList();
-			if (sceneNodes.Contains(nodeIndex))
-			{
-				sceneNodes.Remove(nodeIndex);
-				scene.Nodes = sceneNodes.ToArray();
-			}
+			scene.Nodes = RemoveNode(scene.Nodes, nodeIndex);
 
-			// Remove child references
 			foreach (var node in gltf.Nodes)
 			{
 				if (node.Children == null)
 					continue;
 
-				var childNodes = node.Children.ToList();
-				if (childNodes.Contains(nodeIndex))
-				{
-					childNodes.Remove(nodeIndex);
-					node.Children = childNodes.ToArray();
-				}
+				// Remove child node
+				node.Children = RemoveNode(node.Children, nodeIndex);
 			}
+		}
+
+		private int[] RemoveNode(int[] nodes, int nodeIndex)
+		{
+			var nodeList = nodes.ToList();
+			nodeList.Remove(nodeIndex);
+
+			// Decrement node indices for any nodes with indices after the removed node
+			for (int i = 0; i < nodeList.Count; i++)
+			{
+				if (nodeList[i] > nodeIndex)
+					nodeList[i]--;
+			}
+
+			return nodeList.ToArray();
 		}
 	}
 }
