@@ -89,6 +89,11 @@ namespace UnityGltfTool
 
 		private void GltfFileTextBox_TextChanged(object sender, EventArgs e)
 		{
+			ReloadGltfFile();
+		}
+
+		private void ReloadGltfFile()
+		{
 			var file = gltfFileTextBox.Text;
 			if (File.Exists(file) && HasGltfExtension(file))
 				LoadGltfFile(file);
@@ -157,6 +162,8 @@ namespace UnityGltfTool
 			updater.Update(convertImagesToDds);
 
 			MessageBox.Show("Updated glTF file", "Success", MessageBoxButtons.OK);
+
+			ReloadGltfFile();
 		}
 	}
 }
