@@ -49,7 +49,7 @@ namespace UnityGltfTool.TextureUtils
 
 			var normalTexture = mat.NormalTexture;
 			if (normalTexture != null)
-				ConvertTextureToDds(normalTexture.Index, TextureFormat.BC1);
+				ConvertTextureToDds(normalTexture.Index, TextureFormat.BC5);
 
 			var emissiveTexture = mat.EmissiveTexture;
 			if (emissiveTexture != null)
@@ -160,6 +160,8 @@ namespace UnityGltfTool.TextureUtils
 					return "BC1_UNORM";
 				case TextureFormat.BC3:
 					return "BC3_UNORM";
+				case TextureFormat.BC5:
+					return "BC5_UNORM";
 				default:
 					throw new InvalidOperationException($"Invalid {nameof(TextureFormat)} ({format})");
 			}
