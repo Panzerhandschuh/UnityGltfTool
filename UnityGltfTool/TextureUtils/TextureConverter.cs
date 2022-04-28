@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UnityGltfTool.TextureUtils
 {
@@ -44,7 +41,7 @@ namespace UnityGltfTool.TextureUtils
 
 				var metallicRoughnessTexture = pbrMat.MetallicRoughnessTexture;
 				if (metallicRoughnessTexture != null)
-					ConvertTextureToDds(metallicRoughnessTexture.Index, TextureFormat.BC3);
+					ConvertTextureToDds(metallicRoughnessTexture.Index, TextureFormat.BC1);
 			}
 
 			var normalTexture = mat.NormalTexture;
