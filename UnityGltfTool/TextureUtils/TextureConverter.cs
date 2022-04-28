@@ -39,28 +39,28 @@ namespace UnityGltfTool.TextureUtils
 				{
 					var alphaMode = mat.AlphaMode;
 					var format = (alphaMode == Material.AlphaModeEnum.BLEND) ? TextureFormat.BC3 : TextureFormat.BC1;
-					ConvertTextureToDds(baseColorTexture.Index, format, false);
+					ConvertTextureToDds(baseColorTexture.Index, format);
 				}
 
 				var metallicRoughnessTexture = pbrMat.MetallicRoughnessTexture;
 				if (metallicRoughnessTexture != null)
-					ConvertTextureToDds(metallicRoughnessTexture.Index, TextureFormat.BC1, true);
+					ConvertTextureToDds(metallicRoughnessTexture.Index, TextureFormat.BC3);
 			}
 
 			var normalTexture = mat.NormalTexture;
 			if (normalTexture != null)
-				ConvertTextureToDds(normalTexture.Index, TextureFormat.BC1, true);
+				ConvertTextureToDds(normalTexture.Index, TextureFormat.BC5);
 
 			var emissiveTexture = mat.EmissiveTexture;
 			if (emissiveTexture != null)
-				ConvertTextureToDds(emissiveTexture.Index, TextureFormat.BC1, false);
+				ConvertTextureToDds(emissiveTexture.Index, TextureFormat.BC1);
 
 			var occlusionTexture = mat.OcclusionTexture;
 			if (occlusionTexture != null)
-				ConvertTextureToDds(occlusionTexture.Index, TextureFormat.BC1, true);
+				ConvertTextureToDds(occlusionTexture.Index, TextureFormat.BC1);
 		}
 
-		private void ConvertTextureToDds(int textureIndex, TextureFormat format, bool isLinear)
+		private void ConvertTextureToDds(int textureIndex, TextureFormat format)
 		{
 			var texture = gltf.Textures[textureIndex];
 			if (texture.Extensions != null && texture.Extensions.ContainsKey(ddsExtensionName)) // Texture was already converted to dds
@@ -70,7 +70,7 @@ namespace UnityGltfTool.TextureUtils
 				return;
 
 			var imageIndex = texture.Source.Value;
-			if (ConvertImageToDds(imageIndex, format, isLinear))
+			if (ConvertImageToDds(imageIndex, format))
 			{
 				AddExtensionsUsedAndRequired();
 				ReplaceTextureSourceWithDdsExtension(texture);
@@ -105,7 +105,7 @@ namespace UnityGltfTool.TextureUtils
 			texture.Extensions[ddsExtensionName] = ddsExtension;
 		}
 
-		private bool ConvertImageToDds(int imageIndex, TextureFormat format, bool isLinear)
+		private bool ConvertImageToDds(int imageIndex, TextureFormat format)
 		{
 			var image = gltf.Images[imageIndex];
 
@@ -123,8 +123,7 @@ namespace UnityGltfTool.TextureUtils
 
 			var startInfo = new ProcessStartInfo();
 			startInfo.FileName = "texconv.exe";
-			var srgbOption = isLinear ? "-srgbo " : string.Empty;
-			startInfo.Arguments = $"{srgbOption}-vflip -pow2 -f {formatStr} -o \"{outputDir}\" \"{assetPath}\"";
+			startInfo.Arguments = $"-hflip -vflip -pow2 -f {formatStr} -o \"{outputDir}\" \"{assetPath}\"";
 
 			var process = Process.Start(startInfo);
 			process.EnableRaisingEvents = true;
@@ -161,6 +160,8 @@ namespace UnityGltfTool.TextureUtils
 					return "BC1_UNORM";
 				case TextureFormat.BC3:
 					return "BC3_UNORM";
+				case TextureFormat.BC5:
+					return "BC5_UNORM";
 				default:
 					throw new InvalidOperationException($"Invalid {nameof(TextureFormat)} ({format})");
 			}
