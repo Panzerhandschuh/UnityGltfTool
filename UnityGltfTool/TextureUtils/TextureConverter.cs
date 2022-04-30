@@ -41,12 +41,12 @@ namespace UnityGltfTool.TextureUtils
 
 				var metallicRoughnessTexture = pbrMat.MetallicRoughnessTexture;
 				if (metallicRoughnessTexture != null)
-					ConvertTextureToDds(metallicRoughnessTexture.Index, TextureFormat.BC1);
+					ConvertTextureToDds(metallicRoughnessTexture.Index, TextureFormat.BC7);
 			}
 
 			var normalTexture = mat.NormalTexture;
 			if (normalTexture != null)
-				ConvertTextureToDds(normalTexture.Index, TextureFormat.BC5);
+				ConvertTextureToDds(normalTexture.Index, TextureFormat.BC7);
 
 			var emissiveTexture = mat.EmissiveTexture;
 			if (emissiveTexture != null)
@@ -54,7 +54,7 @@ namespace UnityGltfTool.TextureUtils
 
 			var occlusionTexture = mat.OcclusionTexture;
 			if (occlusionTexture != null)
-				ConvertTextureToDds(occlusionTexture.Index, TextureFormat.BC1);
+				ConvertTextureToDds(occlusionTexture.Index, TextureFormat.BC7);
 		}
 
 		private void ConvertTextureToDds(int textureIndex, TextureFormat format)
@@ -159,6 +159,8 @@ namespace UnityGltfTool.TextureUtils
 					return "BC3_UNORM";
 				case TextureFormat.BC5:
 					return "BC5_UNORM";
+				case TextureFormat.BC7:
+					return "BC7_UNORM";
 				default:
 					throw new InvalidOperationException($"Invalid {nameof(TextureFormat)} ({format})");
 			}
