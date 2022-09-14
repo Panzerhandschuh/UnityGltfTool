@@ -83,7 +83,13 @@ namespace UnityGltfTool
 			if (result == DialogResult.OK)
 			{
 				var file = gltfFileDialog.FileName;
-				gltfFileTextBox.Text = file; // This will trigger GltfFileTextBox_TextChanged
+
+				// Ignore text change event
+				gltfFileTextBox.TextChanged -= GltfFileTextBox_TextChanged;
+				gltfFileTextBox.Text = file;
+				gltfFileTextBox.TextChanged += GltfFileTextBox_TextChanged;
+
+				ReloadGltfFile();
 			}
 		}
 
